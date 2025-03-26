@@ -172,8 +172,8 @@ class _LoanFormState extends State<LoanForm> {
                     },
                   ),
                   const SizedBox(height: 4),
-                  Row(
-                    children: const [
+                  const Row(
+                    children: [
                       Expanded(
                         child: Padding(
                           padding: EdgeInsets.only(left: 12),

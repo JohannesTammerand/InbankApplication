@@ -1,6 +1,7 @@
 package ee.taltech.inbankbackend.config;
 
 import jakarta.annotation.PostConstruct;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 import java.util.TreeMap;
@@ -8,7 +9,7 @@ import java.util.TreeMap;
 /**
  * Holds all necessary constants for the decision engine.
  */
-@Repository
+@Component
 public class DecisionEngineConstants {
     public static final Integer MINIMUM_LOAN_AMOUNT = 2000;
     public static final Integer MAXIMUM_LOAN_AMOUNT = 10000;

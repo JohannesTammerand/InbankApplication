@@ -36,14 +36,15 @@ public class DecisionEngine {
      * @throws InvalidLoanAmountException If the requested loan amount is invalid
      * @throws InvalidLoanPeriodException If the requested loan period is invalid
      * @throws NoValidLoanException If there is no valid loan found for the given ID code, loan amount and loan period
+     * @throws InvalidAgeException If the age derived from the personal ID is under 18 or over the country's life expectation
      */
     public Decision calculateApprovedLoan(String personalCode, Long loanAmount, int loanPeriod, String countryOfResidence)
             throws InvalidPersonalCodeException, InvalidLoanAmountException, InvalidLoanPeriodException,
-            NoValidLoanException, InvalidAgeException {
+            NoValidLoanException, InvalidAgeException, PersonalCodeException {
         try {
             verifyInputs(personalCode, loanAmount, loanPeriod, countryOfResidence);
         } catch (Exception e) {
-            return new Decision(null, null, e.getMessage());
+            throw e;
         }
 
         int outputLoanAmount;
