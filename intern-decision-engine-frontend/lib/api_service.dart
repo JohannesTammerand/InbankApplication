@@ -16,12 +16,13 @@ class ApiService {
   // requestLoanDecision sends a request to the API to get a loan decision
   // based on the provided personalCode, loanAmount, and loanPeriod.
   Future<Map<String, String>> requestLoanDecision(
-      String personalCode, int loanAmount, int loanPeriod) async {
+      String personalCode, int loanAmount, int loanPeriod, String countryOfResidence) async {
     final response = await httpClient.post(
       Uri.parse('$_baseUrl/loan/decision'),
       headers: {'Content-Type': 'application/json'},
       body: jsonEncode({
         'personalCode': personalCode,
+        'countryOfResidence': countryOfResidence,
         'loanAmount': loanAmount,
         'loanPeriod': loanPeriod,
       }),

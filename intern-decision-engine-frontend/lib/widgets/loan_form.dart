@@ -28,14 +28,14 @@ class _LoanFormState extends State<LoanForm> {
   int _loanAmountResult = 0;
   int _loanPeriodResult = 0;
   String _errorMessage = '';
-  String dropdownValue = countries.first;
+  String _countryOfResidence = countries.first;
 
   // Submit the form and update the state with the loan decision results.
   // Only submits if the form inputs are validated.
   void _submitForm() async {
     if (_formKey.currentState!.validate()) {
       final result = await _apiService.requestLoanDecision(
-          _nationalId, _loanAmount, _loanPeriod);
+          _nationalId, _loanAmount, _loanPeriod, _countryOfResidence);
       setState(() {
         int tempAmount = int.parse(result['loanAmount'].toString());
         int tempPeriod = int.parse(result['loanPeriod'].toString());
@@ -101,14 +101,14 @@ class _LoanFormState extends State<LoanForm> {
                       SizedBox(
                         width: 100, // Set a fixed width for the dropdown
                         child: DropdownButton(
-                          value: dropdownValue,
+                          value: _countryOfResidence,
                           style: const TextStyle(color: Colors.white),
                           items: countries.map<DropdownMenuItem<String>>((String value) {
                             return DropdownMenuItem<String>(value: value, child: Text(value));
                           }).toList(),
                           onChanged: (String? value) {
                             setState(() {
-                              dropdownValue = value!;
+                              _countryOfResidence = value!;
                             });
                           },
                         ),
