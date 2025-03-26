@@ -119,7 +119,7 @@ public class DecisionEngine {
         }
         if (!(parser.getAge(personalCode).getYears() > 18 &&
                 parser.getAge(personalCode).getYears() < DecisionEngineConstants.LIFE_EXPECTANCY_BY_COUNTRY.get(countryOfResidence))){
-            throw new InvalidAgeException("Invalid age");
+            throw new InvalidAgeException("Invalid age!");
         }
         if (!(DecisionEngineConstants.MINIMUM_LOAN_AMOUNT <= loanAmount)
                 || !(loanAmount <= DecisionEngineConstants.MAXIMUM_LOAN_AMOUNT)) {

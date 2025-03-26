@@ -133,5 +133,11 @@ class DecisionEngineTest {
                 () -> decisionEngine.calculateApprovedLoan(generator.generatePersonalCode(Gender.MALE, LocalDate.of(1953, 8, 5)), 10000L, 20, "Lithuania"));
     }
 
+    @Test
+    void testUnderage() {
+        assertThrows(InvalidAgeException.class,
+                () -> decisionEngine.calculateApprovedLoan(generator.generatePersonalCode(Gender.MALE, LocalDate.of(2010, 8, 5)), 10000L, 20, "Lithuania"));
+    }
+
 }
 

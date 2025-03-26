@@ -101,6 +101,7 @@ class _LoanFormState extends State<LoanForm> {
                       SizedBox(
                         width: 100, // Set a fixed width for the dropdown
                         child: DropdownButton(
+                          isExpanded: true,
                           value: _countryOfResidence,
                           style: const TextStyle(color: Colors.white),
                           items: countries.map<DropdownMenuItem<String>>((String value) {
