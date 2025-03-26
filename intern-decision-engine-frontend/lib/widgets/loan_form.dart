@@ -6,6 +6,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:inbank_frontend/fonts.dart';
 import 'package:inbank_frontend/widgets/national_id_field.dart';
+import 'package:inbank_frontend/resources/countries.dart';
 
 import '../api_service.dart';
 import '../colors.dart';
@@ -27,6 +28,7 @@ class _LoanFormState extends State<LoanForm> {
   int _loanAmountResult = 0;
   int _loanPeriodResult = 0;
   String _errorMessage = '';
+  String dropdownValue = countries.first;
 
   // Submit the form and update the state with the loan decision results.
   // Only submits if the form inputs are validated.
@@ -88,6 +90,31 @@ class _LoanFormState extends State<LoanForm> {
                       );
                     },
                   ),
+                 Row(
+                    children: [
+                      const Padding(
+                          padding: EdgeInsets.only(right: 12),
+                          child: Align(
+                              alignment: Alignment.center,
+                              child: Text('Country of residence:')),
+                        ),
+                      SizedBox(
+                        width: 100, // Set a fixed width for the dropdown
+                        child: DropdownButton(
+                          value: dropdownValue,
+                          style: const TextStyle(color: Colors.white),
+                          items: countries.map<DropdownMenuItem<String>>((String value) {
+                            return DropdownMenuItem<String>(value: value, child: Text(value));
+                          }).toList(),
+                          onChanged: (String? value) {
+                            setState(() {
+                              dropdownValue = value!;
+                            });
+                          },
+                        ),
+                      )
+                    ],
+                  ),
                   const SizedBox(height: 60.0),
                   Text('Loan Amount: $_loanAmount €'),
                   const SizedBox(height: 8),
@@ -106,9 +133,9 @@ class _LoanFormState extends State<LoanForm> {
                     },
                   ),
                   const SizedBox(height: 4),
-                  Row(
-                    children: const [
-                      Expanded(
+                  const Row(
+                    children: [
+                       Expanded(
                         child: Padding(
                           padding: EdgeInsets.only(left: 12),
                           child: Align(
